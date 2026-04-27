@@ -105,29 +105,40 @@ function parseCSV(text) {
   var lines = text.trim().split('\n');
   var games = [];
   for (var i = 1; i < lines.length; i++) {
-    var cols = lines[i].split(',');
-    if (cols.length < 4) continue;
-    var matchup = cols[0].trim().replace(/"/g, '');
-    var date = cols[1].trim().replace(/"/g, '');
-    var time = cols[2].trim().replace(/"/g, '');
-    var venue = cols[3].trim().replace(/"/g, '');
+    // Split carefully handling quoted fields
+    var cols = splitCSVLine(lines[i]);
+    if (cols.length < 3) continue;
+    // col 0 = row number, col 1 = matchup, col 2 = date, col 3 = time, col 4 = venue
+    var matchup = cols[1] ? cols[1].trim().replace(/"/g, '') : '';
+    var date    = cols[2] ? cols[2].trim().replace(/"/g, '') : '';
+    var time    = cols[3] ? cols[3].trim().replace(/"/g, '') : '';
+    var venue   = cols[4] ? cols[4].trim().replace(/"/g, '') : '';
     if (!matchup || !date) continue;
 
-    // Parse "Team1 vs Team2"
-    var vsParts = matchup.split(' vs ');
+    // Parse "Team1 VS Team2" or "Team1 vs Team2"
+    var vsParts = matchup.split(/ vs /i);
     if (vsParts.length < 2) continue;
     var t1 = vsParts[0].trim();
     var t2 = vsParts[1].trim();
 
-    // Normalize date to 2026-MM-DD
     var normDate = normalizeDate(date);
-
-    // Normalize time: "7" -> "7:00 PM"
     var normTime = normalizeTime(time);
 
     games.push({ t1: t1, t2: t2, date: normDate, time: normTime, v: venue.toUpperCase() });
   }
   return games;
+}
+
+function splitCSVLine(line) {
+  var cols = [], cur = '', inQ = false;
+  for (var i = 0; i < line.length; i++) {
+    var c = line[i];
+    if (c === '"') { inQ = !inQ; }
+    else if (c === ',' && !inQ) { cols.push(cur); cur = ''; }
+    else { cur += c; }
+  }
+  cols.push(cur);
+  return cols;
 }
 
 function normalizeDate(d) {
