@@ -183,7 +183,7 @@ function timeSort(a,b){
 function onDiv(){
   var div=document.getElementById('sdiv').value;
   var ts=document.getElementById('steam');
-  ts.innerHTML='<option value="">— Select Team —</option><option value="ALL">All Teams</option>';
+  ts.innerHTML='<option value="">— Select Team —</option>';
   if(div&&TEAMS[div]){
     TEAMS[div].forEach(function(t){var o=document.createElement('option');o.value=t;o.text=t;ts.appendChild(o);});
     ts.disabled=false;
