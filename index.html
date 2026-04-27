@@ -234,10 +234,9 @@ function onTeam(){
         cardClass=iWon?' win':' loss';
       }
       h+='<div class="card'+cardClass+'">';
-      h+='<div class="time-col"><div class="time-main">'+tr+'</div></div>';
-      h+='<div class="divider"></div>';
-      h+='<div class="info-col"><div class="matchup"><strong>'+team+'</strong><span class="vs">vs.</span>'+opp+'</div><div class="meta-row">'+vhtml+'</div></div>';
-      h+='<div class="rcol"><div class="rlabel">Result</div><span class="result '+resultClass+'">'+resultText+'</span></div>';
+      h+='<div class="card-top"><div class="time-main">'+tr+'</div><span class="result '+resultClass+'">'+resultText+'</span></div>';
+      h+='<div class="matchup"><strong>'+team+'</strong><span class="vs">vs.</span>'+opp+'</div>';
+      h+='<div class="venue-tag">📍 '+vhtml+'</div>';
       h+='</div>';
     });
     h+='</div>';
