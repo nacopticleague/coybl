@@ -29,13 +29,12 @@ body { font-family: Arial, sans-serif; background: #c9b5a5; }
 .dlabel { font-family: Georgia, serif; font-size: 0.8rem; font-weight: 700; color: #5c1010; white-space: nowrap; }
 .dline { flex: 1; height: 1px; background: #b8a492; }
 .card { background: #fff; border-radius: 10px; box-shadow: 0 2px 10px rgba(80,20,20,.1); padding: 13px 15px; margin-bottom: 9px; border-left: 4px solid #7d1a1a; display: flex; align-items: center; gap: 13px; }
-.tcol { text-align: center; min-width: 110px; flex-shrink: 0; }
+.tcol { text-align: center; min-width: 120px; flex-shrink: 0; }
 .thour { font-family: Georgia, serif; font-size: 0.82rem; font-weight: 700; color: #7d1a1a; line-height: 1.4; }
 .divdr { width: 1px; height: 38px; background: #c9b5a5; flex-shrink: 0; }
 .mcol { flex: 1; min-width: 0; }
 .teams { font-weight: 700; font-size: 0.93rem; color: #222; }
 .teams .sep { color: #7d1a1a; margin: 0 4px; }
-.teams .opp { color: #555; }
 .venue { display: inline-flex; align-items: center; gap: 4px; font-size: 0.7rem; font-weight: 600; margin-top: 4px; }
 .venue a { color: #2d3a8c; text-decoration: underline; }
 .footer { text-align: center; padding: 13px; font-family: Georgia, serif; font-size: 0.72rem; color: #5c1010; border-top: 1px solid #b8a492; background: #d8c8ba; }
@@ -52,10 +51,10 @@ body { font-family: Arial, sans-serif; background: #c9b5a5; }
       <label>Division</label>
       <select id="sdiv" onchange="onDiv()">
         <option value="">— Select Division —</option>
-        <option value="JHS">Junior High (JHS)</option>
-        <option value="Girls">Girls</option>
         <option value="HS-NY">High School — NY</option>
         <option value="HS-NJ">High School — NJ</option>
+        <option value="JHS">Junior High (JHS)</option>
+        <option value="Girls">Girls</option>
         <option value="College">College</option>
         <option value="Mens">Men's</option>
       </select>
@@ -76,40 +75,93 @@ body { font-family: Arial, sans-serif; background: #c9b5a5; }
 <div class="footer">NA Coptic League 2026 &nbsp;&middot;&nbsp; Regular Season &nbsp;&middot;&nbsp; May 2026 – July 2026</div>
 
 <script>
-var TEAMS={
-  JHS:["SI 1","SI 2","EB 1","EB 2","Holmdel","Westside","Bayonne SASA","Bayonne VMSJ","Queens","Astoria","Makkar","Philadelphia","Summit"],
-  Girls:["SI 1","SI 2","SI 3","EB 1","EB 2","Holmdel","Belleville","Bayonne SASA","BK","Queens","Makkar","Upstate"],
-  "HS-NY":["SI 1 1","SI 2 1","SI 2 2","SI 1 2","BK 1","BK 2","Queens","Astoria","LI 1","LI 2"],
-  "HS-NJ":["EB 1","EB 2","EB 3","Holmdel","Philly","Westside","Belleville","Bayonne SASA 1","Bayonne SASA 2","Bayonne VMSJ 1","Bayonne VMSJ 2","Piscataway","Makkar","Upstate Paramus"],
-  College:["SI 1","SI 2","Holmdel","EB 1","EB 2","EB 3","Bayonne SASA","Bayonne VMSJ","BK","Queens","Upstate","LI","Piscataway","Philly"],
-  Mens:["SI 1","SI 2","EB","Holmdel","Bayonne SASA","Hatfield","Summit","LI"]
+var VENUES = {
+  HC: { name: "Holy Child Catholic Church", url: "https://maps.google.com/?q=4747+Amboy+Rd,+Staten+Island,+NY+10312" },
+  BK: { name: "St. George Community Center", url: "https://maps.google.com/?q=6209+11th+Ave,+Brooklyn,+NY+11219" }
 };
-var VENUES={
-  HC:{name:"Holy Child Catholic Church",url:"https://maps.google.com/?q=4747+Amboy+Rd,+Staten+Island,+NY+10312"},
-  BK:{name:"St. George Community Center",url:"https://maps.google.com/?q=6209+11th+Ave,+Brooklyn,+NY+11219"}
+
+var TEAMS = {
+  "HS-NY": ["SI 1 1","SI 2 1","SI 2 2","SI 1 2","BK 1","BK 2","Queens","Astoria","LI 1","LI 2"],
+  "HS-NJ": ["EB 1","EB 2","EB 3","Holmdel","Philly","Westside","Belleville","Bayonne SASA 1","Bayonne SASA 2","Bayonne VMSJ 1","Bayonne VMSJ 2","Piscataway","Makkar","Upstate Paramus"],
+  "Girls": ["SI 1","SI 2","SI 3","EB 1","EB 2","Holmdel","Belleville","Bayonne SASA","BK","Queens","Makkar","Upstate"],
+  "JHS": ["SI 1","SI 2","EB 1","EB 2","Holmdel","Westside","Bayonne SASA","Bayonne VMSJ","Queens","Astoria","Makkar","Philadelphia","Summit"],
+  "College": ["SI 1","SI 2","Holmdel","EB 1","EB 2","EB 3","Bayonne SASA","Bayonne VMSJ","BK","Queens","Upstate","LI","Piscataway","Philly"],
+  "Mens": ["SI 1","SI 2","EB","Holmdel","Bayonne SASA","Hatfield","Summit","LI"]
 };
-var GAMES=[
-  {t1:"SI 2",t2:"Holmdel",div:"Mens",date:"2026-05-02",time:"7:00 PM",v:"HC"},
-  {t1:"SI 1",t2:"Bayonne SASA",div:"Mens",date:"2026-05-03",time:"7:00 PM",v:"HC"},
-  {t1:"Bayonne SASA 1",t2:"Belleville",div:"HS-NJ",date:"2026-05-03",time:"4:00 PM",v:"HC"},
-  {t1:"Holmdel",t2:"Westside",div:"HS-NJ",date:"2026-05-02",time:"4:00 PM",v:"HC"},
-  {t1:"Upstate Paramus",t2:"Piscataway",div:"HS-NJ",date:"2026-05-03",time:"6:00 PM",v:"HC"},
-  {t1:"Queens",t2:"Astoria",div:"JHS",date:"2026-05-02",time:"1:00 PM",v:"BK"},
-  {t1:"Westside",t2:"Bayonne SASA",div:"JHS",date:"2026-05-02",time:"2:00 PM",v:"HC"},
-  {t1:"SI 1",t2:"Queens",div:"JHS",date:"2026-05-02",time:"3:00 PM",v:"BK"},
-  {t1:"Astoria",t2:"SI 2",div:"JHS",date:"2026-05-02",time:"4:00 PM",v:"BK"},
-  {t1:"SI 1 1",t2:"SI 2 1",div:"HS-NY",date:"2026-05-03",time:"8:00 PM",v:"HC"},
-  {t1:"SI 2 2",t2:"SI 1 2",div:"HS-NY",date:"2026-05-02",time:"6:00 PM",v:"HC"},
-  {t1:"BK 1",t2:"BK 2",div:"HS-NY",date:"2026-05-02",time:"7:00 PM",v:"BK"},
-  {t1:"Astoria",t2:"Queens",div:"HS-NY",date:"2026-05-02",time:"2:00 PM",v:"BK"},
-  {t1:"SI 1",t2:"SI 2",div:"Girls",date:"2026-05-02",time:"8:00 PM",v:"HC"},
-  {t1:"BK",t2:"Queens",div:"Girls",date:"2026-05-02",time:"5:00 PM",v:"BK"},
-  {t1:"Holmdel",t2:"Belleville",div:"Girls",date:"2026-05-03",time:"5:00 PM",v:"HC"},
-  {t1:"BK",t2:"Bayonne VMSJ",div:"College",date:"2026-05-02",time:"6:00 PM",v:"BK"},
-  {t1:"Philly",t2:"Holmdel",div:"College",date:"2026-05-02",time:"5:00 PM",v:"HC"},
-  {t1:"Piscataway",t2:"Bayonne SASA",div:"College",date:"2026-05-03",time:"3:00 PM",v:"HC"},
-  {t1:"SI 2",t2:"Queens",div:"College",date:"2026-05-02",time:"12:00 PM",v:"BK"}
-];
+
+var SHEET_URLS = {
+  "HS-NY": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSA9JypwKR6h6SPM9jVeNg96GKda0dSyMXw5bn-iRWz8A7lLm_Q3Z-RjVg7X7g6XA/pub?gid=2026663789&single=true&output=csv",
+  "HS-NJ": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSA9JypwKR6h6SPM9jVeNg96GKda0dSyMXw5bn-iRWz8A7lLm_Q3Z-RjVg7X7g6XA/pub?gid=763457976&single=true&output=csv",
+  "JHS":   "https://docs.google.com/spreadsheets/d/e/2PACX-1vSA9JypwKR6h6SPM9jVeNg96GKda0dSyMXw5bn-iRWz8A7lLm_Q3Z-RjVg7X7g6XA/pub?gid=163847790&single=true&output=csv",
+  "Girls": "https://docs.google.com/spreadsheets/d/e/2PACX-1vSA9JypwKR6h6SPM9jVeNg96GKda0dSyMXw5bn-iRWz8A7lLm_Q3Z-RjVg7X7g6XA/pub?gid=1530081297&single=true&output=csv",
+  "College":"https://docs.google.com/spreadsheets/d/e/2PACX-1vSA9JypwKR6h6SPM9jVeNg96GKda0dSyMXw5bn-iRWz8A7lLm_Q3Z-RjVg7X7g6XA/pub?gid=994943850&single=true&output=csv",
+  "Mens":  "https://docs.google.com/spreadsheets/d/e/2PACX-1vSA9JypwKR6h6SPM9jVeNg96GKda0dSyMXw5bn-iRWz8A7lLm_Q3Z-RjVg7X7g6XA/pub?gid=565582986&single=true&output=csv"
+};
+
+var currentDiv = "";
+var cachedGames = {};
+
+function parseCSV(text) {
+  var lines = text.trim().split('\n');
+  var games = [];
+  for (var i = 1; i < lines.length; i++) {
+    var cols = lines[i].split(',');
+    if (cols.length < 4) continue;
+    var matchup = cols[0].trim().replace(/"/g, '');
+    var date = cols[1].trim().replace(/"/g, '');
+    var time = cols[2].trim().replace(/"/g, '');
+    var venue = cols[3].trim().replace(/"/g, '');
+    if (!matchup || !date) continue;
+
+    // Parse "Team1 vs Team2"
+    var vsParts = matchup.split(' vs ');
+    if (vsParts.length < 2) continue;
+    var t1 = vsParts[0].trim();
+    var t2 = vsParts[1].trim();
+
+    // Normalize date to 2026-MM-DD
+    var normDate = normalizeDate(date);
+
+    // Normalize time: "7" -> "7:00 PM"
+    var normTime = normalizeTime(time);
+
+    games.push({ t1: t1, t2: t2, date: normDate, time: normTime, v: venue.toUpperCase() });
+  }
+  return games;
+}
+
+function normalizeDate(d) {
+  d = d.trim();
+  // Handle "3-May", "2-May" format
+  var monthNames = {jan:1,feb:2,mar:3,apr:4,may:5,jun:6,jul:7,aug:8,sep:9,oct:10,nov:11,dec:12};
+  var m1 = d.match(/^(\d+)-([A-Za-z]+)$/);
+  if (m1) {
+    var day = parseInt(m1[1]);
+    var mon = m1[2].toLowerCase().substring(0,3);
+    var mo = monthNames[mon] || 5;
+    return '2026-' + (mo<10?'0'+mo:mo) + '-' + (day<10?'0'+day:day);
+  }
+  // Handle "5/2" format
+  var m2 = d.match(/^(\d+)\/(\d+)$/);
+  if (m2) {
+    var mo2 = parseInt(m2[1]);
+    var day2 = parseInt(m2[2]);
+    return '2026-' + (mo2<10?'0'+mo2:mo2) + '-' + (day2<10?'0'+day2:day2);
+  }
+  return d;
+}
+
+function normalizeTime(t) {
+  t = t.trim();
+  // If already formatted like "7:00 PM" return as is
+  if (t.match(/^\d+:\d+\s*(AM|PM)$/i)) return t;
+  // If just a number like "7"
+  var h = parseInt(t);
+  if (isNaN(h)) return t;
+  var ampm = h < 8 ? 'PM' : (h < 12 ? 'AM' : (h === 12 ? 'PM' : 'PM'));
+  if (h > 12) h = h - 12;
+  return h + ':00 ' + ampm;
+}
 
 function addHour(time) {
   var parts = time.split(' ');
@@ -120,15 +172,15 @@ function addHour(time) {
   var endH = h + 1;
   var endAmpm = ampm;
   if (h === 11 && ampm === 'AM') { endAmpm = 'PM'; }
-  if (endH === 12 && ampm === 'PM') { endAmpm = 'PM'; }
   if (endH > 12) { endH = endH - 12; }
   return parts[0] + ' ' + ampm + ' – ' + endH + ':' + m + ' ' + endAmpm;
 }
 
 function onDiv() {
   var div = document.getElementById('sdiv').value;
+  currentDiv = div;
   var ts = document.getElementById('steam');
-      ts.innerHTML = '<option value="">— Select Team —</option>';
+  ts.innerHTML = '<option value="">— Select Team —</option>';
   if (div && TEAMS[div]) {
     var sorted = TEAMS[div].slice().sort();
     sorted.forEach(function(t) {
@@ -146,29 +198,54 @@ function onDiv() {
 function onTeam() {
   var div = document.getElementById('sdiv').value;
   var team = document.getElementById('steam').value;
+  if (!team || !div) return;
+
   var out = document.getElementById('out');
-  if (!team) { return; }
-  var f = GAMES.filter(function(g) { return g.div === div && (g.t1 === team || g.t2 === team); })
+  out.innerHTML = '<div class="empty"><div class="icon">⏳</div><h3>Loading...</h3><p>Fetching schedule from Google Sheets.</p></div>';
+
+  if (cachedGames[div]) {
+    renderGames(cachedGames[div], team, div);
+  } else {
+    fetch('https://script.google.com/macros/s/AKfycbzES5Y0Yn8BlAGX861wk8qrYHOwaFSADx16r5oFHZR6lgQ40nHEpfrH_zjL3GDv65O-/exec?sheet=' + div)
+      .then(function(r) { return r.text(); })
+      .then(function(text) {
+        cachedGames[div] = parseCSV(text);
+        renderGames(cachedGames[div], team, div);
+      })
+      .catch(function() {
+        out.innerHTML = '<div class="empty"><div class="icon">❌</div><h3>Error</h3><p>Could not load schedule. Please try again.</p></div>';
+      });
+  }
+}
+
+function renderGames(games, team, div) {
+  var out = document.getElementById('out');
+  var f = games.filter(function(g) { return g.t1 === team || g.t2 === team; })
     .sort(function(a, b) { return a.date < b.date ? -1 : a.date > b.date ? 1 : 0; });
+
   if (!f.length) {
     out.innerHTML = '<div class="empty"><div class="icon">📅</div><h3>No Games Found</h3><p>No games scheduled for <strong>' + team + '</strong> yet.</p></div>';
     return;
   }
+
   var by = {};
   f.forEach(function(g) { if (!by[g.date]) by[g.date] = []; by[g.date].push(g); });
+
   var h = '<div class="statsbar"><div class="badge"><div class="dot"></div>' + team + '</div><div class="cnt">' + f.length + ' game' + (f.length !== 1 ? 's' : '') + ' &middot; ' + div + '</div></div>';
+
   Object.keys(by).sort().forEach(function(date) {
-    var dl = new Date(date + 'T12:00:00').toLocaleDateString('en-US', {weekday:'long', month:'long', day:'numeric', year:'numeric'});
+    var dl = new Date(date + 'T12:00:00').toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
     h += '<div class="dg"><div class="dh"><span class="dlabel">' + dl + '</span><div class="dline"></div></div>';
     by[date].forEach(function(g) {
       var opp = g.t1 === team ? g.t2 : g.t1;
       var timeRange = addHour(g.time);
       var vn = VENUES[g.v];
-      var vhtml = vn ? '<div class="venue">📍 <a href="' + vn.url + '" target="_blank">' + vn.name + '</a></div>' : '';
+      var vhtml = vn ? '<div class="venue">📍 <a href="' + vn.url + '" target="_blank">' + vn.name + '</a></div>' : (g.v ? '<div class="venue">📍 ' + g.v + '</div>' : '');
       h += '<div class="card"><div class="tcol"><div class="thour">' + timeRange + '</div></div><div class="divdr"></div><div class="mcol"><div class="teams"><strong>' + team + '</strong> <span class="sep">vs.</span> <strong>' + opp + '</strong></div>' + vhtml + '</div></div>';
     });
     h += '</div>';
   });
+
   out.innerHTML = h;
 }
 </script>
