@@ -60,7 +60,7 @@ body{font-family:'Source Sans 3',sans-serif;background:#ffffff;min-height:100vh;
   <h1>🏀 My Games</h1>
   <div class="sub">NA Coptic League · 2026 Season · May 2026 – July 2026</div>
 </div>
-<div class="notice">Games are still being added 🏀 </div>
+<div class="notice">Games are still being added.</div>
 <div class="filters">
   <div class="filter-row">
     <div class="fg">
@@ -101,29 +101,21 @@ var TEAMS={
 };
 var GAMES=[
   // HS-NY
-  {t1:"SI1 (1)",t2:"SI2 (1)",div:"HS-NY",date:"2026-05-03",time:"8:00 PM",v:"HC",winner:"",s1:"",s2:""},
-  {t1:"SI1 (2)",t2:"SI2 (2)",div:"HS-NY",date:"2026-05-02",time:"6:00 PM",v:"HC",winner:"",s1:"",s2:""},
-  {t1:"Brooklyn (1)",t2:"Brooklyn (2)",div:"HS-NY",date:"2026-05-02",time:"7:00 PM",v:"BK",winner:"",s1:"",s2:""},
   {t1:"Queens",t2:"Astoria",div:"HS-NY",date:"2026-05-02",time:"3:00 PM",v:"BK",winner:"",s1:"",s2:""},
+  {t1:"Brooklyn (1)",t2:"Brooklyn (2)",div:"HS-NY",date:"2026-05-02",time:"7:00 PM",v:"BK",winner:"",s1:"",s2:""},
+  {t1:"SI1 (1)",t2:"SI2 (1)",div:"HS-NY",date:"2026-05-03",time:"8:00 PM",v:"HC",winner:"",s1:"",s2:""},
   // HS-NJ
-  {t1:"Bayonne 1 (SASA) (1)",t2:"Belleville",div:"HS-NJ",date:"2026-05-03",time:"4:00 PM",v:"HC",winner:"",s1:"",s2:""},
-  {t1:"West Side",t2:"Holmdel",div:"HS-NJ",date:"2026-05-03",time:"7:00 PM",v:"HC",winner:"",s1:"",s2:""},
   {t1:"Upstate",t2:"Piscataway",div:"HS-NJ",date:"2026-05-03",time:"6:00 PM",v:"HC",winner:"",s1:"",s2:""},
+  {t1:"West Side",t2:"Holmdel",div:"HS-NJ",date:"2026-05-03",time:"7:00 PM",v:"HC",winner:"",s1:"",s2:""},
   // JHS
-  {t1:"West Side",t2:"Bayonne 1 (SASA)",div:"JHS",date:"2026-05-03",time:"2:00 PM",v:"HC",winner:"",s1:"",s2:""},
   {t1:"SI2",t2:"Astoria",div:"JHS",date:"2026-05-02",time:"4:00 PM",v:"BK",winner:"",s1:"",s2:""},
+  {t1:"West Side",t2:"Bayonne 1 (SASA)",div:"JHS",date:"2026-05-03",time:"3:00 PM",v:"HC",winner:"",s1:"",s2:""},
   // Girls
-  {t1:"SI1",t2:"SI2",div:"Girls",date:"2026-05-02",time:"8:00 PM",v:"HC",winner:"",s1:"",s2:""},
-  {t1:"Brooklyn",t2:"Queens",div:"Girls",date:"2026-05-02",time:"5:00 PM",v:"BK",winner:"",s1:"",s2:""},
   {t1:"Belleville",t2:"Holmdel",div:"Girls",date:"2026-05-03",time:"5:00 PM",v:"HC",winner:"",s1:"",s2:""},
   // College
-  {t1:"Brooklyn",t2:"Bayonne 2 (VMSJ)",div:"College",date:"2026-05-02",time:"6:00 PM",v:"BK",winner:"",s1:"",s2:""},
-  {t1:"Philadelphia",t2:"Holmdel",div:"College",date:"2026-05-02",time:"5:00 PM",v:"HC",winner:"",s1:"",s2:""},
-  {t1:"Piscataway",t2:"Bayonne 1 (SASA)",div:"College",date:"2026-05-03",time:"3:00 PM",v:"HC",winner:"",s1:"",s2:""},
   {t1:"Queens",t2:"SI2",div:"College",date:"2026-05-02",time:"5:00 PM",v:"BK",winner:"",s1:"",s2:""},
-  // Mens
-  {t1:"SI2",t2:"Holmdel",div:"Mens",date:"2026-05-02",time:"7:00 PM",v:"HC",winner:"",s1:"",s2:""},
-  {t1:"SI1",t2:"Bayonne 1 (SASA)",div:"Mens",date:"2026-05-02",time:"4:00 PM",v:"HC",winner:"",s1:"",s2:""}
+  {t1:"Brooklyn",t2:"Bayonne 2 (VMSJ)",div:"College",date:"2026-05-02",time:"6:00 PM",v:"BK",winner:"",s1:"",s2:""},
+  {t1:"Piscataway",t2:"Bayonne 1 (SASA)",div:"College",date:"2026-05-03",time:"4:00 PM",v:"HC",winner:"",s1:"",s2:""}
 ];
 function addHour(time){
   var p=time.split(' '),hm=p[0].split(':'),h=+hm[0],m=hm[1],ap=p[1];
